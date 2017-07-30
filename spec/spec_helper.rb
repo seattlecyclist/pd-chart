@@ -78,10 +78,9 @@ RSpec.configure do |config|
   end
 =end
 
-
-  VCR.config do |c|
+  VCR.configure do |c|
     c.cassette_library_dir = 'vcr_cassettes'
-    c.stub_with :fakeweb
+    c.hook_into :webmock
     c.default_cassette_options = { :record => :new_episodes }
   end
 end

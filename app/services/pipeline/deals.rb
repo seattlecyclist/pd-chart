@@ -6,11 +6,10 @@ module Pipeline
       PipelineDeals.configure do |config|
         config.api_key = ENV['PIPELINE_API_KEY']
       end
-      all
     end
 
     def by_deal_stage
-      @groups ||= all.group_by {|deal| deal.deal_stage }
+      @groups ||= all_deals.group_by {|deal| deal.deal_stage }
     end
 
     def stage_totals
@@ -24,11 +23,11 @@ module Pipeline
       stage_totals.sort_by! {|h| h[:stage_percent]}
     end
 
-    def max
+    def max_total
       stage_totals.map {|h| h[:total]}.max
     end
 
-    def all
+    def all_deals
       @all_deals ||=  PipelineDeals::Deal.find(:all)
     end
 
