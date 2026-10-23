@@ -1,0 +1,17 @@
+<head>
+  <link rel="stylesheet" href="assets/app.css">
+</head>
+<h2>
+  Pipeline Deals
+</h2>
+
+<div id="chart">
+
+  <ul id="bars">
+    <% @totals.each do |stage| %>
+        <li>
+          <div class="bar" style="height:<%=  (stage[:total] / @max_total )  * 100 %>%"></div><span><%= stage[:stage] %></span>
+        </li>
+    <% end %>
+  </ul>
+</div>
